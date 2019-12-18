@@ -27,6 +27,8 @@ file = tk.Menu(main_menu,tearoff=False)
 ####edit 
 #edit icons
 
+undo_icon = tk.PhotoImage(file='icons2/undo_arrow.png')
+redo_icon = tk.PhotoImage(file='icons2/redo_arrow.png')
 copy_icon = tk.PhotoImage(file='icons2/copy.png')
 paste_icon = tk.PhotoImage(file='icons2/paste.png')
 cut_icon = tk.PhotoImage(file='icons2/cut.png')
@@ -144,7 +146,7 @@ align_right_btn.grid(row=0,column=8,padx=5)
 
 ########## text editor  #############
 
-text_editor = tk.Text(main_application)
+text_editor = tk.Text(main_application, undo=True)
 text_editor.config(wrap = 'word', relief=tk.FLAT)
 
 
@@ -463,6 +465,9 @@ def find_func(event=None):
 
     find_dialogue.mainloop()
 
+edit.add_command(label='Undo',image=undo_icon, compound=tk.LEFT, accelerator='Ctrl+Z', command=lambda:text_editor.event_generate("<Control z>"))
+edit.add_command(label='Redo',image=redo_icon, compound=tk.LEFT, accelerator='Ctrl+Y', command=lambda:text_editor.event_generate("<Control y>"))
+edit.add_separator()
 edit.add_command(label='Copy',image=copy_icon,compound=tk.LEFT, accelerator='Ctrl+C',command=lambda:text_editor.event_generate("<Control c>"))
 edit.add_command(label='Paste',image=paste_icon,compound=tk.LEFT, accelerator='Ctrl+V',command=lambda:text_editor.event_generate("<Control v>"))
 edit.add_command(label='Cut',image=cut_icon,compound=tk.LEFT, accelerator='Ctrl+X',command=lambda:text_editor.event_generate("<Control x>"))
